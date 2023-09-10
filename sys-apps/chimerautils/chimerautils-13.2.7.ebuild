@@ -21,6 +21,8 @@ LICENSE="BSD"
 SLOT="0"
 RDEPEND="
 		sys-libs/libxo
+		dev-libs/libedit
+		sys-libs/acl
 		openssl? ( dev-libs/openssl )
 "
 DEPEND="
