@@ -22,7 +22,7 @@ SLOT="0"
 RDEPEND="
 		sys-libs/libxo
 		dev-libs/libedit
-		sys-libs/acl
+		sys-apps/acl
 		openssl? ( dev-libs/openssl )
 "
 DEPEND="
