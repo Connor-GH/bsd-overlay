@@ -20,6 +20,7 @@ IUSE="+openssl minimal"
 LICENSE="BSD"
 SLOT="0"
 RDEPEND="
+		sys-libs/libxo
 		openssl? ( dev-libs/openssl )
 "
 DEPEND="
