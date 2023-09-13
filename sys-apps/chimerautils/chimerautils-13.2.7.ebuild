@@ -47,7 +47,7 @@ src_configure() {
 }
 
 src_compile() {
-	meson_src_compile
+	meson_src_compile --prefix "/usr/bsd"
 }
 
 src_install() {
@@ -55,5 +55,5 @@ src_install() {
 }
 
 pkg_postinst() {
-	:
+	elog "Add \"/usr/bsd/bin\" to \$PATH and add \"/usr/bsd/share/man\" to \$MANPATH"
 }
