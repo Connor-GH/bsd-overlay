@@ -33,6 +33,9 @@ BDEPEND="
 	dev-util/meson
 "
 
+PATCHES=(
+	"${FILESDIR}/${P}-find-POSIXLY_CORRECT.patch"
+)
 src_prepare() {
 	default
 
