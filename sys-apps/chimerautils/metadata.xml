@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<upstream>
+		<remote-id type="github">chimera-linux/chimerautils</remote-id>
+	</upstream>
+	<use>
+		<flag name="bzip2">Use bzip2 for gzip(1)</flag>
+		<flag name="libedit">Use libedit (needed by bc(1))</flag>
+		<flag name="lzma">Use liblzma for gzip(1)</flag>
+		<flag name="openssl">Use OpenSSL (required by some tools, optional elsewhere)</flag>
+		<flag name="terminfo">Use terminfo color output for ls(1)</flag>
+		<flag name="tiny">Also build tiny versions of some of the tools</flag>
+		<flag name="zlib">Use zlib for gzip(1)</flag>
+	</use>
+</pkgmetadata>
