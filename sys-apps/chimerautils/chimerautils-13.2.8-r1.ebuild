@@ -51,11 +51,10 @@ src_prepare() {
 
 	export BSD_PREFIX="${EPREFIX}/opt/bsd"
 
-	# Make bc use prefix path
-	sed -i \
-		-e "s|/usr/bin/dc|${BSD_PREFIX}/bin/dc|" \
-		-e "s|/usr/share/misc/bc.library|${BSD_PREFIX}/share/misc/bc.library|" \
-		src.freebsd/bc/bc/pathnames.h || die
+	# Just not use BSD bc. It ends up
+	# being more trouble than it's worth, plus
+	# there is an app-alternatives/bc[gh]
+	sed -i -e "s|subdir('bc')||g" src.freebsd/bc/meson.build || die
 }
 
 src_configure() {
