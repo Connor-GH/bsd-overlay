@@ -44,7 +44,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/chimerautils-13.2.8-find-POSIXLY_CORRECT.patch"
+	"${FILESDIR}/chimerautils-find-POSIXLY_CORRECT.patch"
 )
 src_prepare() {
 	eapply_user
