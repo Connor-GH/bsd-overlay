@@ -43,10 +43,11 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=(
-	"${FILESDIR}/chimerautils-find-POSIXLY_CORRECT.patch"
-)
 src_prepare() {
+	local PATCHES=(
+		"${FILESDIR}"/*.patch
+	)
+	default
 	eapply_user
 
 	export BSD_PREFIX="${EPREFIX}/opt/bsd"
