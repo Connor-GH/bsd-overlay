@@ -19,7 +19,9 @@ fi
 LICENSE="BSD"
 SLOT="0"
 
-IUSE="+bzip2 +libedit +lzma +openssl +terminfo tiny +zlib"
+# bsd bc is more trouble than it's worth and
+# cannot be used to build the linux kernel
+IUSE="bsd-bc +bzip2 debug +libedit +lzma +openssl +terminfo tiny +zlib"
 
 # No tests
 RESTRICT="test"
@@ -27,6 +29,7 @@ RESTRICT="test"
 RDEPEND="
 	sys-apps/acl
 	sys-libs/libxo
+	app-arch/zstd
 	bzip2? ( app-arch/bzip2 )
 	libedit? ( dev-libs/libedit )
 	lzma? ( app-arch/xz-utils )
@@ -51,11 +54,6 @@ src_prepare() {
 	eapply_user
 
 	export BSD_PREFIX="${EPREFIX}/opt/bsd"
-
-	# Just not use BSD bc. It ends up
-	# being more trouble than it's worth, plus
-	# there is an app-alternatives/bc[gh]
-	sed -i -e "s|subdir('bc')||g" src.freebsd/bc/meson.build || die
 }
 
 src_configure() {
@@ -67,6 +65,8 @@ src_configure() {
 		$(meson_feature tiny)
 		$(meson_feature zlib)
 		$(meson_use terminfo color_ls)
+		$(meson_use bsd-bc bc)
+		--buildtype $(usex debug debugoptimized release)
 		--prefix=${BSD_PREFIX}
 	)
 
@@ -74,5 +74,14 @@ src_configure() {
 }
 
 pkg_postinst() {
+	if use bsd-bc; then
+		elog "bsd-bc has been enabled."
+		elog ""
+		elog "Be advised that it cannot successfully build the"
+		elog "kernel without using a distribution kernel."
+		elog ""
+		elog "See https://wiki.gentoo.org/wiki/Project:Distribution_Kernel"
+		elog "for more details."
+	fi
 	elog "Add \"${BSD_PREFIX}/bin\" to \$PATH and add \"${BSD_PREFIX}/share/man\" to \$MANPATH"
 }

@@ -19,9 +19,9 @@ fi
 LICENSE="BSD"
 SLOT="0"
 
-# bsd bc is more trouble than it's worth and 
+# bsd bc is more trouble than it's worth and
 # cannot be used to build the linux kernel
-IUSE="bsd-bc +bzip2 +libedit +lzma +openssl +terminfo tiny +zlib"
+IUSE="bsd-bc +bzip2 debug +libedit +lzma +openssl +terminfo tiny +zlib"
 
 # No tests
 RESTRICT="test"
@@ -66,6 +66,7 @@ src_configure() {
 		$(meson_feature zlib)
 		$(meson_use terminfo color_ls)
 		$(meson_use bsd-bc bc)
+		--buildtype $(usex debug debugoptimized release)
 		--prefix=${BSD_PREFIX}
 	)
 
@@ -75,8 +76,12 @@ src_configure() {
 pkg_postinst() {
 	if use bsd-bc; then
 		elog "bsd-bc has been enabled."
+		elog ""
 		elog "Be advised that it cannot successfully build the"
-		elog "linux kernel using *-sources."
+		elog "kernel without using a distribution kernel."
+		elog ""
+		elog "See https://wiki.gentoo.org/wiki/Project:Distribution_Kernel"
+		elog "for more details."
 	fi
 	elog "Add \"${BSD_PREFIX}/bin\" to \$PATH and add \"${BSD_PREFIX}/share/man\" to \$MANPATH"
 }
