@@ -21,7 +21,7 @@ SLOT="0"
 
 # bsd bc is more trouble than it's worth and
 # cannot be used to build the linux kernel
-IUSE="bsd-bc +bzip2 debug +libedit +lzma +openssl +terminfo tiny +zlib"
+IUSE="bsd-bc +bzip2 +libedit +lzma +openssl +terminfo tiny +zlib"
 
 # No tests
 RESTRICT="test"
@@ -66,7 +66,6 @@ src_configure() {
 		$(meson_feature zlib)
 		$(meson_use terminfo color_ls)
 		$(meson_use bsd-bc bc)
-		--buildtype $(usex debug debugoptimized release)
 		--prefix=${BSD_PREFIX}
 	)
 
